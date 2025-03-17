@@ -1,4 +1,4 @@
-package com.example.zzz;
+package com.example.zzz
 
 interface LibraryAction {
     fun takeHome(): String

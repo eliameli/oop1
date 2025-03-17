@@ -7,22 +7,8 @@ class Disk(
     isAvailable: Boolean,
     name: String,
     val diskType: String
-) : LibraryItem(id, isAvailable, name), LibraryAction {
+) : LibraryItem(id, isAvailable, name) {
 
-    override fun getBriefInfo() = "$diskType $name доступна: ${if (isAvailable) "Да" else "Нет"}"
-
-    override fun getDetailedInfo() = "$diskType $name доступна: ${if (isAvailable) "Да" else "Нет"}"
-
-    override fun takeHome(): String {
-        return if (isAvailable) {
-            isAvailable = false
-            "$name взят домой."
-        } else {
-            "$name недоступен для взятия домой."
-        }
-    }
-
-    override fun readInHall(): String {
-        return "Нельзя пользоваться диском в читальном зале."
-    }
+    override fun getBriefInfo(): String = "$diskType $name доступна: ${if (isAvailable) "Да" else "Нет"}"
+    override fun getDetailedInfo(): String = "$diskType $name доступна: ${if (isAvailable) "Да" else "Нет"}"
 }
