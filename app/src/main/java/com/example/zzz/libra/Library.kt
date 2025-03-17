@@ -3,13 +3,10 @@ package com.example.zzz.libra
 import com.example.zzz.models.Book
 import com.example.zzz.models.Newspaper
 import com.example.zzz.models.Disk
-import com.example.zzz.libra.Library
 import com.example.zzz.models.LibraryItem
 import com.example.zzz.LibraryAction
 
 class Library(private val items: List<LibraryItem>) {
-
-
     fun start() {
         while (true) {
             println("Выберите тип объекта:\n1. Показать книги\n2. Показать газеты\n3. Показать диски\n0. Выход")
@@ -22,8 +19,6 @@ class Library(private val items: List<LibraryItem>) {
             }
         }
     }
-
-
     private fun <T : LibraryItem> showItems(items: List<T>) {
         items.forEachIndexed { index, item -> println("${index + 1}. ${item.getBriefInfo()}") }
         println("Выберите объект (номер) или 0 для возврата в меню:")
@@ -37,7 +32,6 @@ class Library(private val items: List<LibraryItem>) {
             println("Неверный номер объекта.")
         }
     }
-
     // Выполнить действие
     private fun performAction(item: LibraryAction) {
         println("Выберите действие:\n1. Взять домой\n2. Читать в читальном зале\n3. Показать подробную информацию\n4. Вернуть\n0. Вернуться в меню")

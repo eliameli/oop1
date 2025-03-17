@@ -1,5 +1,4 @@
 package com.example.zzz.models
-
 import com.example.zzz.LibraryAction
 
 class Book(
@@ -26,7 +25,6 @@ class Book(
             println("$name недоступна для взятия домой.")
         }
     }
-
 
     override fun readInHall() {
         if (isAvailable) {

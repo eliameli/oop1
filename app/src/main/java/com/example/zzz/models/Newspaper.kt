@@ -1,5 +1,4 @@
 package com.example.zzz.models
-
 import com.example.zzz.LibraryAction
 
 class Newspaper(
