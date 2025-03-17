@@ -1,6 +1,12 @@
 package com.example.zzz
 
+
+
 interface LibraryAction {
-    fun takeHome(): String
-    fun readInHall(): String
+    fun getBriefInfo(): String  // кратко
+    fun getDetailedInfo(): String  // подробно
+    // действия
+    fun takeHome()
+    fun readInHall()
+    fun returnItem()
 }
