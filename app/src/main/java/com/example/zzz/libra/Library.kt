@@ -5,17 +5,16 @@ import com.example.zzz.models.Newspaper
 import com.example.zzz.models.Disk
 import com.example.zzz.models.LibraryItem
 
-// то что было в мейн и я поменял
 class Library(private val items: List<LibraryItem>) {
 
-    // запуск библио
+    // запуск библиотеки
     fun start() {
         while (true) {
             println("Выберите тип объекта:\n1. Показать книги\n2. Показать газеты\n3. Показать диски\n0. Выход")
             when (readLine()?.toIntOrNull()) {
-                1 -> showItems(items.filterIsInstance<Book>())
-                2 -> showItems(items.filterIsInstance<Newspaper>())
-                3 -> showItems(items.filterIsInstance<Disk>())
+                1 -> showItems(items.filterIsInstance<LibraryAction>())
+                2 -> showItems(items.filterIsInstance<LibraryAction>())
+                3 -> showItems(items.filterIsInstance<LibraryAction>())
                 0 -> return
                 else -> println("Неверный выбор.")
             }
@@ -23,7 +22,7 @@ class Library(private val items: List<LibraryItem>) {
     }
 
     // список
-    private fun <T : LibraryItem> showItems(items: List<T>) {
+    private fun <T : LibraryAction> showItems(items: List<T>) {
         items.forEachIndexed { index, item -> println("${index + 1}. ${item.getBriefInfo()}") }
         println("Выберите объект (номер) или 0 для возврата в меню:")
         val objectNumber = readLine()?.toIntOrNull()
@@ -37,42 +36,15 @@ class Library(private val items: List<LibraryItem>) {
         }
     }
 
-    // doing
-    private fun performAction(item: LibraryItem) {
-        println("Выберите действие:\n1. Взять домой\n2. Читать в читальном зале\n3. Показать подробную информацию\n4. Вернуть\n0. Вернуться в меню")
+    // выполнение действий
+    private fun performAction(item: LibraryAction) {
+        println("Выберите действие:\n1. Взять домой\n2. Читать в читальном зале\n3. Показать подробную информацию\n0. Вернуться в меню")
         when (readLine()?.toIntOrNull()) {
-            1 -> if (item is Disk || item is Book) performTakeHome(item) else println("Нельзя взять газету домой.")
-            2 -> if (item is Book || item is Newspaper) performReadInHall(item) else println("Нельзя пользоваться диском в читальном зале.")
+            1 -> println(item.takeHome())
+            2 -> println(item.readInHall())
             3 -> println(item.getDetailedInfo())
-            4 -> if (!item.isAvailable) returnItem(item) else println("Объект уже доступен.")
             0 -> return
             else -> println("Неверный выбор.")
         }
-    }
-
-
-    private fun performTakeHome(item: LibraryItem) {
-        if (item.isAvailable) {
-            item.isAvailable = false
-            println("${item.getBriefInfo()} взяли домой.")
-        } else {
-            println("Объект недоступен для взятия домой.")
-        }
-    }
-
-
-    private fun performReadInHall(item: LibraryItem) {
-        if (item.isAvailable) {
-            item.isAvailable = false
-            println("${item.getBriefInfo()} можно читать в читальном зале.")
-        } else {
-            println("Объект недоступен для чтения в зале.")
-        }
-    }
-
-
-    private fun returnItem(item: LibraryItem) {
-        item.isAvailable = true
-        println("${item.getBriefInfo()} возвращен.")
     }
 }
