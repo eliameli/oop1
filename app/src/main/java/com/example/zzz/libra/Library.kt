@@ -1,63 +1,8 @@
-
-
-
-
-
-
-
-
-
-
-
-
-// общий класс
-abstract class LibraryItem(
-    val id: Int,
-    var isAvailable: Boolean,
-    val name: String
-) {
-    abstract fun getBriefInfo(): String
-    abstract fun getDetailedInfo(): String
-}
-
-// классы для типов
-class Book(
-    id: Int,
-    isAvailable: Boolean,
-    name: String,
-    val author: String,
-    val pages: Int
-) : LibraryItem(id, isAvailable, name) {
-    override fun getBriefInfo() = "$name доступна: ${if (isAvailable) "Да" else "Нет"}"
-    override fun getDetailedInfo() = "Книга: $name ($pages стр.) автора: $author с id: $id доступна: ${if (isAvailable) "Да" else "Нет"}"
-}
-
-class Newspaper(
-    id: Int,
-    isAvailable: Boolean,
-    name: String,
-    val issueNumber: Int
-) : LibraryItem(id, isAvailable, name) {
-    override fun getBriefInfo() = "$name доступна: ${if (isAvailable) "Да" else "Нет"}"
-    override fun getDetailedInfo() = "Выпуск: $issueNumber газеты $name с id: $id доступна: ${if (isAvailable) "Да" else "Нет"}"
-}
-
-class Disk(
-    id: Int,
-    isAvailable: Boolean,
-    name: String,
-    val diskType: String
-) : LibraryItem(id, isAvailable, name) {
-    override fun getBriefInfo() = "$diskType $name доступна: ${if (isAvailable) "Да" else "Нет"}"
-    override fun getDetailedInfo() = "$diskType $name доступна: ${if (isAvailable) "Да" else "Нет"}"
-}
-
-
-
-
-
-
-
+package com.example.zzz.libra
+import com.example.zzz.models.Book
+import com.example.zzz.models.Newspaper
+import com.example.zzz.models.Disk
+import com.example.zzz.models.LibraryItem
 
 // то что было в мейн и я поменял
 class Library(private val items: List<LibraryItem>) {
@@ -128,29 +73,4 @@ class Library(private val items: List<LibraryItem>) {
         item.isAvailable = true
         println("${item.getBriefInfo()} возвращен.")
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-fun main() {
-    //создание элементов
-    val items = listOf(
-        Book(1, true, "Маугли", "Джозеф Киплинг", 202),
-        Book(11, true, "Звездные войны", "Джордж Лукас", 401),
-        Newspaper(2, true, "Сельская жизнь", 794),
-        Newspaper(21, true, "Семья", 23),
-        Disk(3, true, "Дэдпул и Росомаха", "DVD"),
-        Disk(31, true, "Один Дома", "CD")
-    )
-
-    // запуск
-    Library(items).start()
 }
